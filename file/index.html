@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--coded by Sajia Sohana-->
+    <title>Modern Calculator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #121212;
+            margin: 0;
+        }
+        .calculator {
+            background-color: #222;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            width: 320px;
+        }
+        .display {
+            background-color: #333;
+            color: #fff;
+            font-size: 2em;
+            padding: 20px;
+            text-align: right;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .button {
+            background-color: #444;
+            color: #fff;
+            border: none;
+            padding: 20px;
+            font-size: 1.5em;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #666;
+        }
+        .button.operator {
+            background-color: #ffcc00;
+            color: #222;
+        }
+        .button.operator:hover {
+            background-color: #e6b800;
+        }
+    </style>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.9.5/brython.min.js"></script>
+</head>
+<body onload="brython()">
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <div class="buttons">
+            <button class="button" id="clear">C</button>
+            <button class="button" id="7">7</button>
+            <button class="button" id="8">8</button>
+            <button class="button" id="9">9</button>
+            <button class="button operator" id="divide">/</button>
+            <button class="button" id="4">4</button>
+            <button class="button" id="5">5</button>
+            <button class="button" id="6">6</button>
+            <button class="button operator" id="multiply">*</button>
+            <button class="button" id="1">1</button>
+            <button class="button" id="2">2</button>
+            <button class="button" id="3">3</button>
+            <button class="button operator" id="subtract">-</button>
+            <button class="button" id="0">0</button>
+            <button class="button" id="dot">.</button>
+            <button class="button operator" id="equals">=</button>
+            <button class="button operator" id="add">+</button>
+        </div>
+    </div>
+
+    <script type="text/python">
+        from browser import document, alert
+
+        def clear_display(event):
+            display.text = '0'
+
+        def append_to_display(event):
+            if display.text == '0':
+                display.text = event.target.text
+            else:
+                display.text += event.target.text
+
+        def calculate_result(event):
+            try:
+                result = eval(display.text)
+                display.text = str(result)
+            except:
+                display.text = 'Error'
+
+        display = document['display']
+        document['clear'].bind('click', clear_display)
+        document['0'].bind('click', append_to_display)
+        document['1'].bind('click', append_to_display)
+        document['2'].bind('click', append_to_display)
+        document['3'].bind('click', append_to_display)
+        document['4'].bind('click', append_to_display)
+        document['5'].bind('click', append_to_display)
+        document['6'].bind('click', append_to_display)
+        document['7'].bind('click', append_to_display)
+        document['8'].bind('click', append_to_display)
+        document['9'].bind('click', append_to_display)
+        document['dot'].bind('click', append_to_display)
+        document['add'].bind('click', append_to_display)
+        document['subtract'].bind('click', append_to_display)
+        document['multiply'].bind('click', append_to_display)
+        document['divide'].bind('click', append_to_display)
+        document['equals'].bind('click', calculate_result)
+    </script>
+</body>
+</html>
+
+
